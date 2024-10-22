@@ -1,11 +1,7 @@
-from fastapi import FastAPI
-from mangum import Mangum
+from flask import Flask, jsonify
 
-app = FastAPI()
+app = Flask(__name__)
 
-@app.get("/ping")
-async def ping():
-    return {"message": "pong"}
-
-# Wrap FastAPI app with Mangum for compatibility with Vercel
-handler = Mangum(app)
+@app.route('/ping', methods=['GET'])
+def ping():
+    return jsonify({"message": "pong"})
